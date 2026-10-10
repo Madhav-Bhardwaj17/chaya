@@ -39,9 +39,16 @@ code with tests, not a slide.
 ## Try it in two minutes, no AWS account
 
 ```bash
+# On Linux / macOS:
 make setup            # once: create .venv, install the package + dev deps
 make demo             # walk the whole loop against a synthetic Hyderabad afternoon
 make serve            # the console + FastAPI at http://127.0.0.1:8000
+
+# On Windows (PowerShell):
+python -m venv .venv
+.\.venv\Scripts\pip install -e ".[dev]"
+.\.venv\Scripts\python -m chhaya.cli demo     # run offline demo loop
+.\.venv\Scripts\python -m chhaya.cli serve    # launch API & console at http://127.0.0.1:8000
 ```
 
 Open <http://127.0.0.1:8000>, pick an hour, workload and crew size, and triage
@@ -52,8 +59,8 @@ advisory, the worker-minutes ledger and the audit trail all update. Every call
 is the production code path; only the weather (a deterministic fake day), the
 store (JSON under `.chhaya/`) and the agent (scripted) are local stand-ins.
 
-No secrets, no network, no API key, no frontend build. `make demo` works with
-the wifi off.
+No secrets, no network, no API key, no frontend build. Zero-build single-file console
+with high-resolution cinematic industrial assets served via FastAPI.
 
 ---
 
