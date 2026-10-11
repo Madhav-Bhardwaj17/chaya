@@ -246,7 +246,7 @@ src/chhaya/
   settings.py  local vs aws in one place (safe defaults; no env needed for local)
   cli.py       serve / triage / escalate / demo
 policies/      heat_policy_v1.yaml — the whole of what Chhaya is allowed to do
-web/           index.html — the single-file, zero-build console
+frontend/      index.html — the single-file, zero-build console & cinematic assets
 demo/          fixtures/hyderabad-may-18.json — the deterministic replay
 template.yaml  SAM: single-table DynamoDB, SNS, 3 Lambdas, 4 least-privilege managed policies
 docs/          architecture.md · safety.md · runbook.md · submission.md · LEARNINGS.md · blog.md

@@ -92,7 +92,7 @@ disallow_any_generics = true
 disallow_untyped_defs = true
 no_implicit_reexport = true
 show_error_codes = true
-exclude = ["build/", "dist/", "web/"]
+exclude = ["build/", "dist/", "web/", "frontend/"]
 
 [[tool.mypy.overrides]]
 module = ["boto3.*", "botocore.*", "moto.*", "strands.*", "tests.*"]

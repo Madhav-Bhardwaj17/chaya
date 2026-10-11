@@ -45,17 +45,18 @@ __all__ = ["create_app"]
 
 
 def _find_web_dir() -> Path | None:
-    """Locate ``web/index.html`` under the repo or a Lambda bundle.
+    """Locate ``frontend/index.html`` or ``web/index.html`` under the repo or a Lambda bundle.
 
-    Local installs keep ``web/`` at the repository root; Lambda unpacks the
+    Local installs keep ``frontend/`` (or ``web/``) at the repository root; Lambda unpacks the
     same tree under ``/var/task``. Walking the parents handles both layouts
     instead of assuming a fixed depth.
     """
     here = Path(__file__).resolve()
     for parent in here.parents:
-        candidate = parent / "web" / "index.html"
-        if candidate.is_file():
-            return candidate.parent
+        for candidate_name in ("frontend", "web"):
+            candidate = parent / candidate_name / "index.html"
+            if candidate.is_file():
+                return candidate.parent
     return None
 
 
@@ -283,6 +284,7 @@ def create_app(runtime: Runtime | None = None) -> FastAPI:
 
     if _WEB_DIR is not None:
         app.mount("/assets", StaticFiles(directory=_WEB_DIR), name="assets")
+        app.mount("/frontend", StaticFiles(directory=_WEB_DIR), name="frontend")
 
         @app.get("/")
         def index() -> FileResponse:
